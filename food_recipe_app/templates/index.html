@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Foodie Vision</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="manifest" href="/static/manifest.json">
+<meta name="theme-color" content="#ff5722">
+</head>
+<body>
+
+<!-- Floating food -->
+<div class="floating food1">🍕</div>
+<div class="floating food2">🍔</div>
+<div class="floating food3">🍜</div>
+<div class="floating food4">🍰</div>
+<div class="floating food5">🥗</div>
+
+<div class="app-container">
+
+  <!-- Header -->
+  <div class="top-bar">
+    <div class="logo">
+      <span>🍽</span>
+      <h1>Foodie <b>Vision</b></h1>
+    </div>
+    <button class="dark-btn" onclick="toggleDark()">🌙</button>
+  </div>
+
+  <p class="tagline">See food. Know it. Cook it.</p>
+
+  <!-- Upload -->
+  <div class="card">
+    <input type="file" id="img" accept="image/*" onchange="previewImage()">
+
+    <div class="preview">
+      <img id="previewImg">
+    </div>
+
+    <button onclick="analyze()">Analyze Food</button>
+  </div>
+
+  <!-- Result -->
+  <div id="result" class="result"></div>
+
+</div>
+
+<script>
+let lastSteps = [];
+
+function previewImage() {
+  const img = document.getElementById("img").files[0];
+  const preview = document.getElementById("previewImg");
+  if (img) {
+    preview.src = URL.createObjectURL(img);
+    preview.style.display = "block";
+  }
+}
+
+async function analyze() {
+  const img = document.getElementById("img");
+  const result = document.getElementById("result");
+
+  if (!img.files.length) {
+    alert("Please upload an image");
+    return;
+  }
+
+  result.innerHTML = "<div class='loading'>🔍 Analyzing food...</div>";
+
+  const fd = new FormData();
+  fd.append("file", img.files[0]);
+
+  const res = await fetch("/predict-food", {
+    method: "POST",
+    body: fd
+  });
+
+  const data = await res.json();
+  lastSteps = data.recipe.steps;
+
+  result.innerHTML = `
+    <div class="food-title">🍽 ${data.predicted_food}</div>
+
+    <div class="section">
+      <h3>🧂 Ingredients</h3>
+      <div class="ingredients">
+        ${data.recipe.ingredients.map(i => `<span class="ingredient">${i}</span>`).join("")}
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>👨‍🍳 Cooking Steps</h3>
+      <ol class="steps">
+        ${data.recipe.steps.map(s => `<li>${s}</li>`).join("")}
+      </ol>
+    </div>
+
+    <div class="actions">
+      <button onclick="speakSteps()">🔊 Read Steps</button>
+      <button onclick="window.print()">📄 Save PDF</button>
+    </div>
+
+    <a href="${data.youtube_videos}" target="_blank" class="video-btn">
+      ▶ Watch Cooking Video
+    </a>
+  `;
+}
+
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+
+function speakSteps() {
+  if (!lastSteps.length) return;
+  const speech = new SpeechSynthesisUtterance(lastSteps.join(". "));
+  speech.rate = 0.9;
+  speechSynthesis.speak(speech);
+}
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/service-worker.js");
+}
+</script>
+
+
+</body>
+</html>

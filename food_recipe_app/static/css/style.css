@@ -1,0 +1,183 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #121212, #1e1e1e);
+  color: white;
+}
+
+/* Floating food */
+.floating {
+  position: absolute;
+  font-size: 60px;
+  opacity: 0.25;
+  animation: float 12s infinite ease-in-out;
+}
+
+.food1 { top: 10%; left: 5%; }
+.food2 { top: 30%; left: 80%; }
+.food3 { top: 70%; left: 10%; }
+.food4 { top: 50%; left: 60%; }
+.food5 { top: 85%; left: 40%; }
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(0); }
+}
+
+/* Layout */
+.app-container {
+  max-width: 550px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  font-size: 40px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #ff5722;
+}
+
+.logo b {
+  color: #e91e63;
+}
+
+.dark-btn {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Card */
+.card, .result {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  animation: pop 0.5s ease;
+}
+
+body.dark .card,
+body.dark .result {
+  background: #1f1f1f;
+}
+
+@keyframes pop {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.preview img {
+  width: 100%;
+  border-radius: 12px;
+  display: none;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  background: linear-gradient(135deg, #ff5722, #ff9800);
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+}
+
+/* Food title */
+.food-title {
+  font-size: 26px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff5722, #e91e63);
+  color: white;
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+/* Sections */
+.section {
+  margin-top: 20px;
+}
+
+.ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ingredient {
+  background: #fff3e0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.steps li {
+  background: #fce4ec;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Video */
+.video-btn {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+  background: #e91e63;
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .logo h1 {
+    font-size: 26px;
+  }
+}
