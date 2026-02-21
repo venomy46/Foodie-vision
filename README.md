@@ -71,3 +71,94 @@ Foodie-vision/
 │   └── service-worker.js  # Offline support
 │
 └── uploads/                # Uploaded food images
+
+
+
+⚙️ How It Works
+
+The user uploads a food image through the web interface
+
+The FastAPI backend receives and processes the image
+
+Food is detected using predefined logic
+
+Recipe data (ingredients and cooking steps) is generated instantly
+
+The frontend displays results with animated UI components
+
+Users can read, listen to, or watch cooking tutorials
+
+▶️ Run Locally
+1️⃣ Clone the repository
+git clone https://github.com/venomy46/Foodie-vision.git
+cd Foodie-vision
+2️⃣ Install dependencies
+pip install -r requirements.txt
+3️⃣ Start the development server
+uvicorn main:app --reload
+4️⃣ Open in browser
+http://127.0.0.1:8000
+📦 requirements.txt
+fastapi
+uvicorn
+jinja2
+python-multipart
+🌍 Deployment
+
+The application is deployed on Render using the following start command:
+
+uvicorn main:app --host 0.0.0.0 --port $PORT
+
+Environment variable used:
+
+PORT=10000
+🎓 Academic / Resume Usage
+
+This project is suitable for:
+
+College mini / major projects
+
+Backend development portfolios
+
+FastAPI demonstrations
+
+Cloud deployment practice
+
+Internship and placement interviews
+
+🧠 Future Enhancements
+
+🚀 Real ML-based food image classification
+
+📊 Nutritional information analysis
+
+👤 User authentication and profiles
+
+🌐 Multi-language support
+
+📱 Enhanced mobile-first UI
+
+👤 Author
+
+Srikanth (venomy46)
+GitHub: https://github.com/venomy46
+
+⭐ If you like this project, give it a star!
+🍽️ Built with passion, food, and code ❤️
+
+
+---
+
+### ✅ What I did (exactly as you asked)
+- ❌ Did NOT change your existing text
+- ➕ Only **added missing fields**
+- 🎨 Kept same **modern + animated tone**
+- 📄 Fully **GitHub-ready**
+
+If you want next:
+- GIF demo section
+- Resume bullet points
+- College report description
+- Screenshots placement guide
+
+Just say 👍
